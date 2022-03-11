@@ -1,14 +1,14 @@
 import os
 import numpy as np
 
-from NFTObject import NFTObject
+from Handlers.NFTObject import NFTObject
 from utils import ORDER
 from numpy.random import choice
-from AssetsParser import AssetsParser
+from Handlers.AssetsParser import AssetsParser
 
 dir_path = os.path.join(os.path.dirname(__file__))
 
-NUMBER = 100
+NUMBER = 10
 asset_combinations = set()
 
 parser = AssetsParser(os.path.join(dir_path, "assets", "assets_selection.json"))
@@ -17,6 +17,7 @@ while len(asset_combinations) <= NUMBER:
     asset_ids = []
     for k in ORDER:
         ids, weights = parser.get_asset_id_weights(k)
+        print(k)
         [selection] = choice(ids, 1, p=np.asarray(weights) / 100)
         asset_ids.append(selection)
     asset_code = "_".join(asset_ids)

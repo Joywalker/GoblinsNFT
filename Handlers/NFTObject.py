@@ -23,7 +23,7 @@ class NFTObject:
     def compose_and_save(self):
         baseline = Image.new('RGBA', size=RESOLUTION["8K"])
         for asset_id, asset_class in zip(self.assets_ids, ORDER):
-            image_path = os.path.join(dir_path, "assets", asset_class, "{}.png".format(asset_id))
+            image_path = os.path.join(dir_path, "../assets", asset_class, "{}.png".format(asset_id))
             image_rgba = Image.open(image_path).convert('RGBA').resize(RESOLUTION["8K"])
             baseline = Image.alpha_composite(baseline, image_rgba)
 
