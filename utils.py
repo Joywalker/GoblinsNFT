@@ -5,10 +5,10 @@ ORDER = [
     "Vehicles",
     "Body",
     "LowerBody",
+    "Gloves",
     "UpperBody",
     "Heads",
     "Masks",
-    "Gloves",
     "LeftHand",
     "RightHand"
 ]

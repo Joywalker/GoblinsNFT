@@ -1,10 +1,10 @@
-import json
 import os
+import json
 import numpy as np
 
-from Handlers.NFTObject import NFTObject
 from utils import ORDER
 from numpy.random import choice
+from Handlers.NFTObject import NFTObject
 from Handlers.AssetsParser import AssetsParser
 
 # Set path
@@ -44,7 +44,8 @@ for idx, item in enumerate(asset_combinations):
     asset_metadata = parser.get_meta_for_nft(item)
     nft_obj = NFTObject(descrb_name=item, meta_dict=asset_metadata,
                         config_json={"imgs": imgs_path, "json": json_path, "settings": nft_config},
-                        idx=idx)
+                        idx=idx,
+                        universe="Marvel")
     nft_obj.compose_and_save()
     nft_obj.generate_metadata()
     print('Saved {}'.format(item))
