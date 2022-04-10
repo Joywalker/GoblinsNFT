@@ -25,3 +25,6 @@ COLORS = {
     'green': (0, 255, 0),
     'blue': (0, 0, 255)
 }
+
+# Define Universes
+UNIVERSES = ['Earth', 'WarriorsThroughHistory', 'Memes', 'X-men', 'DC Universe', 'Marvel', 'Spider-man']
