@@ -14,14 +14,15 @@ dir_path = os.path.join(os.path.dirname(__file__))
 
 
 class NFTObject:
-    def __init__(self, descrb_name: str, meta_dict: dict, config_json: dict, idx: int):
+    def __init__(self, descrb_name: str, meta_dict: dict, config_json: dict, idx: int, universe: str):
         self.cfg = config_json
         self.index = idx
         self.asset_name = descrb_name.replace('_', '')
-        self.image_name = self.asset_name + '.png'
-        self.meta_name = self.asset_name + '.json'
+        self.image_name = str(idx) + '.png'
+        self.meta_name = str(idx) + '.json'
         self.assets_ids = descrb_name.split('_')
         self.metadata = meta_dict
+        self.universe = universe
 
     def compose_and_save(self):
         baseline = Image.new('RGBA', size=RESOLUTION["8K"])
@@ -37,17 +38,17 @@ class NFTObject:
             "description": "The Bounty Goblins",
             "dna": self.asset_name,
             **self.cfg["settings"],
-            "name": "#{}".format(self.index),
+            "name": "The{}Goblins #{}".format(self.universe, self.index),
             "date": int(datetime.timestamp(datetime.now())),
-            "image": "ipfs://<ipfshome>/{}.png".format(self.asset_name),
+            "image": "ipfs://<ipfshome>/{}.png".format(self.index),
             "attributes": []
         }
         for asset_id, asset_class in zip(self.assets_ids, ORDER):
             trait_details = self.metadata[asset_class]
             metadata['attributes'].append({
                 'trait_type': asset_class,
-                'trait_value': trait_details['desc'],
-                'trait_category': trait_details['category']
+                'value': trait_details['desc'],
+                'rarity': 0.0
             })
 
         with open(os.path.join(self.cfg["json"], self.meta_name), 'w') as fin:
