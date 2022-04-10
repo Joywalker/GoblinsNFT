@@ -13,18 +13,28 @@ __all__ = ['AssetsParser']
 
 
 class AssetsParser:
-    def __init__(self, assets_json: str):
+    def __init__(self, assets_json: str, config_json: dict):
         assert os.path.isfile(assets_json)
         json_file = open(assets_json, 'r')
+        self.cfg = config_json
         self.json_contents = json.load(json_file)
         self.assets_params = self.__get_assets_params()
+
+    def __check_config(self, asset_dict):
+        is_valid = False
+        for key in self.cfg.keys():
+            if asset_dict[key] in self.cfg[key]:
+                is_valid = True
+            else:
+                return False
+        return is_valid
 
     def __get_assets_params(self):
         """Iterate json and save category, asset_id, weight, description"""
         formatted_json = {asset_category: {} for asset_category in ORDER}
         for key in self.json_contents["variables_metadata"].keys():
             for asset in self.json_contents["variables_metadata"][key]["assets"]:
-                if asset["do_select"] == "True":
+                if self.__check_config(asset):
                     formatted_json[key][asset['id']] = asset
 
             # Re-distribute assets weights
@@ -46,7 +56,7 @@ class AssetsParser:
 
         # Repopulate weights
         for weight, k in zip(weights, assets_list.keys()):
-            assets_list[k]['weight'] = weight
+            assets_list[k]['weight'] = weight if weight > 0 else 0
 
         return assets_list
 
