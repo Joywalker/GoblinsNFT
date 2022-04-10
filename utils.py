@@ -28,3 +28,6 @@ COLORS = {
 
 # Define Universes
 UNIVERSES = ['Earth', 'WarriorsThroughHistory', 'Memes', 'X-men', 'DC Universe', 'Marvel', 'Spider-man']
+
+# Define configs
+CONFIGS = ["Basic", "Marvel", "DC"]

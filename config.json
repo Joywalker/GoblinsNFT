@@ -1,0 +1,14 @@
+{
+  "general": {
+    "count": 100
+  },
+  "paths" : {
+    "collection": "Marvel",
+    "images": "images",
+    "metadata": "metadata"
+  },
+
+  "assets_config": {
+    "universe": ["Marvel", "Earth"]
+  }
+}
