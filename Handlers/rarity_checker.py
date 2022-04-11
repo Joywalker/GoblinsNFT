@@ -42,3 +42,11 @@ for m_file in metadata_files:
         # Iterate through each asset
         for attr in m_data['attributes']:
             mark_occurence(rarity_dict, attr['trait_type'], attr['trait_value'])
+
+# Compose results
+results = []
+for key in rarity_dict['status'].keys():
+    print("\n{}: ".format(key))
+    for r_name, r_count in rarity_dict['status'][key].items():
+        r_percent = (r_count * 100) / rarity_dict['count']
+        print("\t {} - {} out of {} | {:.2f} %".format(r_name, r_count, rarity_dict['count'], r_percent))
