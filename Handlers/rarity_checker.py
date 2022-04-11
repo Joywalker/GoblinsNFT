@@ -7,15 +7,16 @@
 """
 
 # Define imports
-import json
 import os
+import json
+import math
 import argparse
 from glob import glob
 
 # Setup argument parser
 parser = argparse.ArgumentParser(description='Count asset rarities.')
 parser.add_argument('--metadata_path', type=str, help='Path to generated dataset.')
-parser.add_argument('--save', type=bool, help='Boolean flag to save results into a json file.')
+parser.add_argument('--save', type=bool, default=True, help='Boolean flag to save results into a json file.')
 args = parser.parse_args()
 
 
@@ -43,10 +44,24 @@ for m_file in metadata_files:
         for attr in m_data['attributes']:
             mark_occurence(rarity_dict, attr['trait_type'], attr['trait_value'])
 
-# Compose results
-results = []
+# Print results
+results = {
+    "total_count": rarity_dict['count']
+}
 for key in rarity_dict['status'].keys():
     print("\n{}: ".format(key))
+    entries = []
     for r_name, r_count in rarity_dict['status'][key].items():
         r_percent = (r_count * 100) / rarity_dict['count']
         print("\t {} - {} out of {} | {:.2f} %".format(r_name, r_count, rarity_dict['count'], r_percent))
+        entries.append({r_name: {
+            'count': r_count,
+            'percent': round(r_percent, 2)}
+        })
+
+    results[key] = entries
+
+# Save results
+if args.save:
+    with open(os.path.join(args.metadata_path, "..", 'rarities.json'), 'w') as fout:
+        json.dump(results, fout, indent=4)
