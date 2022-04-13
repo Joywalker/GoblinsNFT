@@ -1,0 +1,17 @@
+{
+  "metadata": {
+    "active": true,
+    "collection_path": "/Volumes/Macintosh HD/GoblinsNFT/Marvel",
+    "actions": [
+      {
+        "topic": "image",
+        "type": "replace",
+        "source": "<ipfshome>",
+        "target": "QmNniGAnSogNhdVbdw9pcf8X1shHc6Wt8ckjtT18NekbCF"
+      }
+    ]
+  },
+  "images": {
+    "active": false
+  }
+}

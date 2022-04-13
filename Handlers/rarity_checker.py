@@ -9,7 +9,6 @@
 # Define imports
 import os
 import json
-import math
 import argparse
 from glob import glob
 

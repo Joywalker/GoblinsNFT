@@ -53,3 +53,10 @@ class NFTObject:
 
         with open(os.path.join(self.cfg["json"], self.meta_name), 'w') as fin:
             json.dump(metadata, fin)
+
+        self.metadata = metadata
+
+    def __repr__(self):
+        return "Sample {} with: \n" \
+               "\n\t dna: {}" \
+               "\n\t attributes: {}".format(self.index, self.asset_name, self.metadata)
