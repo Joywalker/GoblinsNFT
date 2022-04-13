@@ -9,6 +9,6 @@
   },
 
   "assets_config": {
-    "universe": ["Marvel", "Earth"]
+    "universe": ["Marvel", "None"]
   }
 }
